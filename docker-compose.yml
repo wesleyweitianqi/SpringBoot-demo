@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+    ports:
+      - "8080:8080"
+      - "8085:8085"
+    expose:
+      - "8080"
+      - "50000"
+    privileged: true
+    user: root
+    restart: always
+    container_name: jenkins
+    environment:
+      JAVA_OPTS: '-Djava.util.logging.config.file=/var/jenkins_home/log.properties'
+
+volumes:
+  jenkins_home:
+    driver: local
